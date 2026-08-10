@@ -4,7 +4,7 @@ const chalk = require("chalk");
 const yosay = require("yosay");
 
 module.exports = class extends Generator {
-  prompting() {
+  async prompting() {
     // Have Yeoman greet the user.
     this.log(
       yosay(
@@ -14,27 +14,22 @@ module.exports = class extends Generator {
       )
     );
 
-    const prompts = [
+    this.answers = await this.prompt([
       {
         type: "input",
         name: "appName",
-        message: "Project Name",
+        message: "What would you like to call your app?",
         default: this.appname
       }
-    ];
+    ]);
 
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.appName;
-      this.props = props;
-    });
+    this.destinationRoot(this.destinationPath(this.answers.appName));
   }
 
   writing() {
-    const { appName } = this.props;
+    const { appName } = this.answers;
 
-    // if current dir is not same as project name create a sub-folder with the project name hyphenated
-
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath("package.json.ejs"),
       this.destinationPath("package.json"),
       { appName }
