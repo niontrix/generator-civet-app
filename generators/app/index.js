@@ -79,23 +79,13 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/src/main.civet`),
-      this.destinationPath("src/main.civet")
+      this.templatePath(`${tmplSourceDir}/src`),
+      this.destinationPath("src")
     );
 
     this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/src/message.civet`),
-      this.destinationPath("src/message.civet")
-    );
-
-    this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/vscode/launch.json`),
-      this.destinationPath(".vscode/launch.json")
-    );
-
-    this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/vscode/tasks.json`),
-      this.destinationPath(".vscode/tasks.json")
+      this.templatePath(`${tmplSourceDir}/vscode`),
+      this.destinationPath(".vscode")
     );
   }
 
@@ -124,23 +114,13 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/src/main.civet`),
-      this.destinationPath("src/main.civet")
+      this.templatePath(`${tmplSourceDir}/src`),
+      this.destinationPath("src")
     );
 
     this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/src/message.civet`),
-      this.destinationPath("src/message.civet")
-    );
-
-    this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/vscode/launch.json`),
-      this.destinationPath(".vscode/launch.json")
-    );
-
-    this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/vscode/tasks.json`),
-      this.destinationPath(".vscode/tasks.json")
+      this.templatePath(`${tmplSourceDir}/vscode`),
+      this.destinationPath(".vscode")
     );
   }
 
@@ -169,23 +149,13 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/src/main.civet`),
-      this.destinationPath("src/main.civet")
+      this.templatePath(`${tmplSourceDir}/src`),
+      this.destinationPath("src")
     );
 
     this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/src/message.civet`),
-      this.destinationPath("src/message.civet")
-    );
-
-    this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/vscode/launch.json`),
-      this.destinationPath(".vscode/launch.json")
-    );
-
-    this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/vscode/tasks.json`),
-      this.destinationPath(".vscode/tasks.json")
+      this.templatePath(`${tmplSourceDir}/vscode`),
+      this.destinationPath(".vscode")
     );
   }
 
