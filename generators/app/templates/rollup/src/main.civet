@@ -1,0 +1,3 @@
+{ message } from "./message.civet"
+
+console.log message

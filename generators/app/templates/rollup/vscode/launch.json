@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug app",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/dist/main.cjs",
+      "preLaunchTask": "npm: build",
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js",
+        "${workspaceFolder}/dist/**/*.cjs",
+        "${workspaceFolder}/dist/**/*.civet.js",
+        "${workspaceFolder}/dist/**/*.civet.cjs"
+      ],
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}

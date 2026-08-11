@@ -25,7 +25,7 @@ module.exports = class extends Generator {
         type: "list",
         name: "framework",
         message: "What framework would you like to use?",
-        choices: ["esbuild", "rolldown"]
+        choices: ["esbuild", "rolldown", "rollup"]
       }
     ]);
 
@@ -41,6 +41,9 @@ module.exports = class extends Generator {
         break;
       case "rolldown":
         this._scaffoldRolldownProject(appName);
+        break;
+      case "rollup":
+        this._scaffoldRollupProject(appName);
         break;
       default:
         this.log("You must select a framework");
@@ -105,6 +108,51 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath(`${tmplSourceDir}/esbuild.js`),
       this.destinationPath("esbuild.js")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/tsconfig.json`),
+      this.destinationPath("tsconfig.json")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/gitignore`),
+      this.destinationPath(".gitignore")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/src/main.civet`),
+      this.destinationPath("src/main.civet")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/src/message.civet`),
+      this.destinationPath("src/message.civet")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/vscode/launch.json`),
+      this.destinationPath(".vscode/launch.json")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/vscode/tasks.json`),
+      this.destinationPath(".vscode/tasks.json")
+    );
+  }
+
+  _scaffoldRollupProject(appName) {
+    const tmplSourceDir = "rollup";
+
+    this.fs.copyTpl(
+      this.templatePath(`${tmplSourceDir}/package.json.ejs`),
+      this.destinationPath("package.json"),
+      { appName }
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/rollup.config.js`),
+      this.destinationPath("rollup.config.js")
     );
 
     this.fs.copy(
