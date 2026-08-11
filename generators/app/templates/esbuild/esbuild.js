@@ -1,6 +1,7 @@
 import * as esbuild from 'esbuild'
 import civetEsbuildPlugin from '@danielx/civet/esbuild'
 
+// for more options, see https://github.com/DanielXMoore/Civet/tree/main/source/unplugin#options
 const options = {
   entryPoints: ['src/main.civet'],
   bundle: true,

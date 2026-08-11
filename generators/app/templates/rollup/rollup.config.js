@@ -11,8 +11,10 @@ export default {
     sourcemap: true,
   },
   plugins: [
+    // for more options, see https://github.com/DanielXMoore/Civet/tree/main/source/unplugin#options
     civetRollupPlugin({
       emitDeclaration: true,
+      declarationExtension: '.d.ts',
       ts: 'preserve',
     }),
   ],

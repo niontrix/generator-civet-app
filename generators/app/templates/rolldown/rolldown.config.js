@@ -10,7 +10,10 @@ export default defineConfig({
     sourcemap: true
   },
   plugins: [
+    // for more options, see https://github.com/DanielXMoore/Civet/tree/main/source/unplugin#options
     civetRolldownPlugin({
+      emitDeclaration: true,
+      declarationExtension: ".d.ts",
       ts: "preserve"
     })
   ]
