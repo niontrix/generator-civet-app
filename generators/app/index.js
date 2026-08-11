@@ -25,7 +25,7 @@ module.exports = class extends Generator {
         type: "list",
         name: "framework",
         message: "What framework would you like to use?",
-        choices: ["esbuild", "rolldown", "rollup"]
+        choices: ["esbuild", "farm", "rolldown", "rollup"]
       }
     ]);
 
@@ -38,6 +38,9 @@ module.exports = class extends Generator {
     switch (this.answers.framework) {
       case "esbuild":
         this._scaffoldEsbuildProject(appName);
+        break;
+      case "farm":
+        this._scaffoldFarmProject(appName);
         break;
       case "rolldown":
         this._scaffoldRolldownProject(appName);
@@ -183,6 +186,51 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath(`${tmplSourceDir}/vscode/tasks.json`),
       this.destinationPath(".vscode/tasks.json")
+    );
+  }
+
+  _scaffoldFarmProject(appName) {
+    const tmplSourceDir = "farm";
+
+    this.fs.copyTpl(
+      this.templatePath(`${tmplSourceDir}/package.json.ejs`),
+      this.destinationPath("package.json"),
+      { appName }
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/gitignore`),
+      this.destinationPath(".gitignore")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/farm.config.js`),
+      this.destinationPath("farm.config.js")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/tsconfig.json`),
+      this.destinationPath("tsconfig.json")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/index.html`),
+      this.destinationPath("index.html")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/public`),
+      this.destinationPath("public")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/src`),
+      this.destinationPath("src")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/vscode`),
+      this.destinationPath(".vscode")
     );
   }
 

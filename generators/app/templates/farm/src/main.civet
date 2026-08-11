@@ -1,0 +1,32 @@
+import "./style.css"
+
+const app = document.querySelector("#app")
+
+if not app
+  throw new Error("The application root was not found.")
+
+let count = 0
+
+app.innerHTML = `
+  <section class="card">
+    <p class="eyebrow">Civet + Farm</p>
+    <h1>Hello from Civet</h1>
+    <p>
+      This is a minimal web application built with Civet and Farm.
+    </p>
+
+    <button id="counter" type="button">
+      Clicks: 0
+    </button>
+  </section>
+`
+
+const counter = document.querySelector("#counter")
+
+if not counter
+  throw new Error("The counter button was not found.")
+
+counter.addEventListener("click", () =>
+  count += 1
+  counter.textContent = `Clicks: ${count}`
+)
