@@ -25,7 +25,7 @@ module.exports = class extends Generator {
         type: "list",
         name: "framework",
         message: "What framework would you like to use?",
-        choices: ["esbuild", "farm", "rolldown", "rollup"]
+        choices: ["esbuild", "farm", "rolldown", "rollup", "webpack"]
       }
     ]);
 
@@ -47,6 +47,9 @@ module.exports = class extends Generator {
         break;
       case "rollup":
         this._scaffoldRollupProject(appName);
+        break;
+      case "webpack":
+        this._scaffoldWebpackProject(appName);
         break;
       default:
         this.log("You must select a framework");
@@ -196,6 +199,41 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath(`${tmplSourceDir}/src`),
       this.destinationPath("src")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/vscode`),
+      this.destinationPath(".vscode")
+    );
+  }
+
+  _scaffoldWebpackProject(appName) {
+    const tmplSourceDir = "webpack";
+
+    this.fs.copyTpl(
+      this.templatePath(`${tmplSourceDir}/package.json.ejs`),
+      this.destinationPath("package.json"),
+      { appName }
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/webpack.config.js`),
+      this.destinationPath("webpack.config.js")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/gitignore`),
+      this.destinationPath(".gitignore")
+    )
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/main.civet`),
+      this.destinationPath("main.civet")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/message.civet`),
+      this.destinationPath("message.civet")
     );
 
     this.fs.copy(

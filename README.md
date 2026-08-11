@@ -23,6 +23,10 @@ yo civet-app
  * Yeoman can be too opinionated at times but is easily convinced not to be.
  * Feel free to [learn more about Yeoman](http://yeoman.io/).
 
+ ## TODO
+
+ - TypeScript <7.0.0 as DevDependency can be removed once Civet and it's plugins are adjusted to the breaking changes in TypeScript >=7.0.0
+
 ## License
 
 LGPL-3.0 © [Tobias Heinlein]()
@@ -34,3 +38,4 @@ LGPL-3.0 © [Tobias Heinlein]()
 [travis-url]: https://travis-ci.com/niontrix/generator-civet-app
 [daviddm-image]: https://david-dm.org/niontrix/generator-civet-app.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/niontrix/generator-civet-app
+

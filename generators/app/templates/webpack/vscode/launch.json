@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug app",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/dist/main.js",
+      "preLaunchTask": "npm: build",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}
