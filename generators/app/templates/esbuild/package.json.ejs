@@ -4,13 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "rolldown -c",
-    "watch": "rolldown -w -c",
+    "build": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
     "start": "node dist/main.js"
   },
   "devDependencies": {
     "@danielx/civet": "^0.11.0",
-    "rolldown": "^1.0.0-beta.6",
+    "esbuild": "^0.27.7",
     "typescript": "<7.0.0"
   }
 }

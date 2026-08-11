@@ -1,0 +1,6 @@
+{ message } from "./message.civet"
+
+console.log message
+
+export m = message
+export * from "./message.civet"
