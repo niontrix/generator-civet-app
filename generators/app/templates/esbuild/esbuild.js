@@ -1,7 +1,7 @@
-import * as esbuild from 'esbuild'
-import civetEsbuildPlugin from '@danielx/civet/esbuild'
+import * as esbuild from 'esbuild';
+import civetEsbuildPlugin from '@danielx/civet/esbuild';
 
-// for more options, see https://github.com/DanielXMoore/Civet/tree/main/source/unplugin#options
+// For more options, see https://github.com/DanielXMoore/Civet/tree/main/source/unplugin#options
 const options = {
   entryPoints: ['src/main.civet'],
   bundle: true,
@@ -12,7 +12,7 @@ const options = {
     declarationExtension: '.d.ts',
   })],
   sourcemap: true,
-}
+};
 
 if (process.argv.includes('--watch')) {
   console.log('watching for changes...')

@@ -1,6 +1,7 @@
 {
   "name": "generator-civet-app",
   "version": "0.1.0",
+  "type": "module",
   "description": "A Yeoman generator to scaffold projects for the Civet language (https://civet.dev).",
   "homepage": "github.com/niontrix/generator-civet-app",
   "author": {
@@ -19,37 +20,34 @@
     "civet",
     "yeoman-generator"
   ],
-  "devDependencies": {
-    "yeoman-test": "^1.7.0",
-    "yeoman-assert": "^3.1.1",
-    "eslint": "^6.6.0",
-    "prettier": "^1.19.1",
-    "husky": "^3.0.9",
-    "lint-staged": "^9.4.3",
-    "eslint-config-prettier": "^6.6.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-config-xo": "^0.27.2",
-    "jest": "^26.1.0"
-  },
   "engines": {
-    "npm": ">= 4.0.0"
+    "node": ">= 18.0.0"
   },
   "dependencies": {
-    "yeoman-generator": "^3.1.1",
-    "chalk": "^2.1.0",
-    "yosay": "^2.0.2"
+    "chalk": "^6.0.0",
+    "yeoman-generator": "^8.2.2",
+    "yosay": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^10.8.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "husky": "^9.1.7",
+    "jest": "^30.4.2",
+    "lint-staged": "^17.3.0",
+    "prettier": "^3.9.6",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^11.6.0"
   },
   "jest": {
     "testEnvironment": "node"
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ],
     "*.json": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "husky": {
@@ -57,26 +55,14 @@
       "pre-commit": "lint-staged"
     }
   },
-  "eslintConfig": {
-    "extends": [
-      "xo",
-      "prettier"
-    ],
-    "env": {
-      "jest": true,
-      "node": true
-    },
-    "rules": {
-      "prettier/prettier": "error"
-    },
-    "plugins": [
-      "prettier"
-    ]
-  },
   "scripts": {
     "pretest": "eslint .",
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "prepare": "husky"
   },
-  "repository": "niontrix/generator-civet-app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/niontrix/generator-civet-app.git"
+  },
   "license": "LGPL-3.0"
 }

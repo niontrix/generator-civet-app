@@ -1,20 +1,23 @@
 "use strict";
-const Generator = require("yeoman-generator");
-const chalk = require("chalk");
-const yosay = require("yosay");
+import Generator from "yeoman-generator";
+import chalk from "chalk";
+import yosay from "yosay";
 
-module.exports = class extends Generator {
-  async prompting() {
-    // Have Yeoman greet the user.
+export default class extends Generator {
+
+  async initializing() {
     this.log(
       yosay(
         `Welcome to the wonderful ${chalk.red(
           "generator-civet-app"
         )} generator!`
-      )
+     )
     );
+  }
 
-    this.answers = await this.prompt([
+  async prompting() {
+    // Have Yeoman greet the user.
+    const prompts = [
       {
         type: "input",
         name: "appName",
@@ -27,15 +30,18 @@ module.exports = class extends Generator {
         message: "What build framework would you like to use?",
         choices: ["esbuild", "farm", "rolldown", "rollup", "webpack"]
       }
-    ]);
+    ];
+
+
+    this.answers = await this.prompt(prompts);
 
     this.destinationRoot(this.destinationPath(this.answers.appName));
   }
 
   writing() {
-    const { appName } = this.answers;
+    const { appName, buildFramework } = this.answers;
 
-    switch (this.answers.buildFramework) {
+    switch (buildFramework) {
       case "esbuild":
         this._scaffoldEsbuildProject(appName);
         break;
@@ -55,6 +61,14 @@ module.exports = class extends Generator {
         this.log("You must select a framework");
         break;
     }
+
+    // always include these dependencies
+    this.addDevDependencies({
+      "@danielx/civet": "^0.11.0",
+      "typescript": "<7.0.0"
+    })
+
+
   }
 
   _scaffoldRolldownProject(appName) {
@@ -90,6 +104,10 @@ module.exports = class extends Generator {
       this.templatePath(`${tmplSourceDir}/vscode`),
       this.destinationPath(".vscode")
     );
+
+    this.addDevDependencies({
+      "rolldown": "^1.2.0"
+    });
   }
 
   _scaffoldEsbuildProject(appName) {
@@ -125,6 +143,10 @@ module.exports = class extends Generator {
       this.templatePath(`${tmplSourceDir}/vscode`),
       this.destinationPath(".vscode")
     );
+  
+    this.addDevDependencies({
+      "esbuild": "^0.27.0"
+    });
   }
 
   _scaffoldRollupProject(appName) {
@@ -160,6 +182,10 @@ module.exports = class extends Generator {
       this.templatePath(`${tmplSourceDir}/vscode`),
       this.destinationPath(".vscode")
     );
+
+    this.addDevDependencies({
+      "rollup": "^4.62.0"
+    });
   }
 
   _scaffoldFarmProject(appName) {
@@ -205,6 +231,11 @@ module.exports = class extends Generator {
       this.templatePath(`${tmplSourceDir}/vscode`),
       this.destinationPath(".vscode")
     );
+  
+    this.addDevDependencies({
+      "@farmfe/cli": "^1.0.0",
+      "@farmfe/core": "^1.6.0"
+    });
   }
 
   _scaffoldWebpackProject(appName) {
@@ -240,13 +271,10 @@ module.exports = class extends Generator {
       this.templatePath(`${tmplSourceDir}/vscode`),
       this.destinationPath(".vscode")
     );
-  }
 
-  install() {
-    this.installDependencies({
-      npm: true,
-      bower: false,
-      yarn: false
+    this.addDevDependencies({
+      "webpack": "^5.109.0",
+      "webpack-cli": "^7.2.0"
     });
   }
 };
