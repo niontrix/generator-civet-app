@@ -27,10 +27,6 @@ yo civet-app
 
  - TypeScript <7.0.0 as DevDependency can be removed once Civet and it's plugins are adjusted to the breaking changes in TypeScript >=7.0.0
 
-## License
-
-LGPL-3.0 © [Tobias Heinlein]()
-
 
 [npm-image]: https://badge.fury.io/js/generator-civet-app.svg
 [npm-url]: https://npmjs.org/package/generator-civet-app

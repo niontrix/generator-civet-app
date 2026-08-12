@@ -1,77 +1,9 @@
-"use strict";
 import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
 
-export default class extends Generator {
-
-  async initializing() {
-    this.log(
-      yosay(
-        `Welcome to the wonderful ${chalk.red(
-          "generator-civet-app"
-        )} generator!`
-     )
-    );
-  }
-
-  async prompting() {
-    // Have Yeoman greet the user.
-    const prompts = [
-      {
-        type: "input",
-        name: "appName",
-        message: "What would you like to call your app?",
-        default: this.appname
-      },
-      {
-        type: "list",
-        name: "buildFramework",
-        message: "What build framework would you like to use?",
-        choices: ["esbuild", "farm", "rolldown", "rollup", "webpack"]
-      }
-    ];
-
-
-    this.answers = await this.prompt(prompts);
-
-    this.destinationRoot(this.destinationPath(this.answers.appName));
-  }
-
-  writing() {
-    const { appName, buildFramework } = this.answers;
-
-    switch (buildFramework) {
-      case "esbuild":
-        this._scaffoldEsbuildProject(appName);
-        break;
-      case "farm":
-        this._scaffoldFarmProject(appName);
-        break;
-      case "rolldown":
-        this._scaffoldRolldownProject(appName);
-        break;
-      case "rollup":
-        this._scaffoldRollupProject(appName);
-        break;
-      case "webpack":
-        this._scaffoldWebpackProject(appName);
-        break;
-      default:
-        this.log("You must select a framework");
-        break;
-    }
-
-    // always include these dependencies
-    this.addDevDependencies({
-      "@danielx/civet": "^0.11.0",
-      "typescript": "<7.0.0"
-    })
-
-
-  }
-
-  _scaffoldRolldownProject(appName) {
+export default class CivetAppGenerator extends Generator {
+  #scaffoldRolldownProject(appName) {
     const tmplSourceDir = "rolldown";
 
     this.fs.copyTpl(
@@ -106,11 +38,11 @@ export default class extends Generator {
     );
 
     this.addDevDependencies({
-      "rolldown": "^1.2.0"
+      rolldown: "^1.2.0"
     });
   }
 
-  _scaffoldEsbuildProject(appName) {
+  #scaffoldEsbuildProject(appName) {
     const tmplSourceDir = "esbuild";
 
     this.fs.copyTpl(
@@ -143,13 +75,13 @@ export default class extends Generator {
       this.templatePath(`${tmplSourceDir}/vscode`),
       this.destinationPath(".vscode")
     );
-  
+
     this.addDevDependencies({
-      "esbuild": "^0.27.0"
+      esbuild: "^0.27.0"
     });
   }
 
-  _scaffoldRollupProject(appName) {
+  #scaffoldRollupProject(appName) {
     const tmplSourceDir = "rollup";
 
     this.fs.copyTpl(
@@ -184,11 +116,11 @@ export default class extends Generator {
     );
 
     this.addDevDependencies({
-      "rollup": "^4.62.0"
+      rollup: "^4.62.0"
     });
   }
 
-  _scaffoldFarmProject(appName) {
+  #scaffoldFarmProject(appName) {
     const tmplSourceDir = "farm";
 
     this.fs.copyTpl(
@@ -231,14 +163,14 @@ export default class extends Generator {
       this.templatePath(`${tmplSourceDir}/vscode`),
       this.destinationPath(".vscode")
     );
-  
+
     this.addDevDependencies({
       "@farmfe/cli": "^1.0.0",
       "@farmfe/core": "^1.6.0"
     });
   }
 
-  _scaffoldWebpackProject(appName) {
+  #scaffoldWebpackProject(appName) {
     const tmplSourceDir = "webpack";
 
     this.fs.copyTpl(
@@ -273,8 +205,76 @@ export default class extends Generator {
     );
 
     this.addDevDependencies({
-      "webpack": "^5.109.0",
+      webpack: "^5.109.0",
       "webpack-cli": "^7.2.0"
     });
   }
-};
+
+  async initializing() {
+    this.log(yosay(`Welcome to the wonderful ${chalk.red("generator-civet-app")} generator!`));
+  }
+
+  async prompting() {
+    // Have Yeoman greet the user.
+    const prompts = [
+      {
+        type: "input",
+        name: "appName",
+        message: "What would you like to call your app?",
+        default: this.appname
+      },
+      {
+        type: "list",
+        name: "buildFramework",
+        message: "What build framework would you like to use?",
+        choices: ["esbuild", "farm", "rolldown", "rollup", "webpack"]
+      }
+    ];
+
+    this.answers = await this.prompt(prompts);
+
+    this.destinationRoot(this.destinationPath(this.answers.appName));
+  }
+
+  writing() {
+    const { appName, buildFramework } = this.answers;
+
+    switch (buildFramework) {
+      case "esbuild": {
+        this.#scaffoldEsbuildProject(appName);
+        break;
+      }
+
+      case "farm": {
+        this.#scaffoldFarmProject(appName);
+        break;
+      }
+
+      case "rolldown": {
+        this.#scaffoldRolldownProject(appName);
+        break;
+      }
+
+      case "rollup": {
+        this.#scaffoldRollupProject(appName);
+        break;
+      }
+
+      case "webpack": {
+        this.#scaffoldWebpackProject(appName);
+        break;
+      }
+
+      default: {
+        this.log("You must select a framework");
+        break;
+      }
+    }
+
+    // Always include these dependencies
+    this.addDevDependencies({
+      "@danielx/civet": "^0.11.0",
+      typescript: "<7.0.0"
+    });
+  }
+}
