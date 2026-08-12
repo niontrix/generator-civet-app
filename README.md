@@ -1,5 +1,5 @@
 # generator-civet-app [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> A Yeoman generator to scaffold projects for the Civet language (https://civet.dev).
+> A Yeoman generator to scaffold projects for Civet (https://civet.dev).
 
 ## Installation
 
