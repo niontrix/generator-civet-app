@@ -23,8 +23,8 @@ module.exports = class extends Generator {
       },
       {
         type: "list",
-        name: "framework",
-        message: "What framework would you like to use?",
+        name: "buildFramework",
+        message: "What build framework would you like to use?",
         choices: ["esbuild", "farm", "rolldown", "rollup", "webpack"]
       }
     ]);
@@ -35,7 +35,7 @@ module.exports = class extends Generator {
   writing() {
     const { appName } = this.answers;
 
-    switch (this.answers.framework) {
+    switch (this.answers.buildFramework) {
       case "esbuild":
         this._scaffoldEsbuildProject(appName);
         break;
@@ -224,7 +224,7 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath(`${tmplSourceDir}/gitignore`),
       this.destinationPath(".gitignore")
-    )
+    );
 
     this.fs.copy(
       this.templatePath(`${tmplSourceDir}/main.civet`),
@@ -250,4 +250,3 @@ module.exports = class extends Generator {
     });
   }
 };
-
