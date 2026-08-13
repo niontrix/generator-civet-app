@@ -1,7 +1,8 @@
 export default [
   {
     ignores: [
-      "**/templates/**"
+      "**/templates/**",
+      "templates/**/vitest.config.js"
     ]
   },
   {

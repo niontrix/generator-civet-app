@@ -3,5 +3,6 @@
   "jest.enable": false,
   "bun.test.enable": false,
   "vitest.enable": true,
-  "vitest.watchOnStartup": false
+  "vitest.watchOnStartup": false,
+  "vitest.configSearchPatternExclude": "{**/node_modules/**,**/templates/**}"
 }
