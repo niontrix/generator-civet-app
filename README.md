@@ -1,4 +1,4 @@
-# generator-civet-app [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-civet-app [![NPM version][npm-image]][npm-url] [![Build Status][github-badge]][github-url]
 > A Yeoman generator to scaffold projects for Civet (https://civet.dev).
 
 ## Installation
@@ -30,8 +30,5 @@ yo civet-app
 
 [npm-image]: https://badge.fury.io/js/generator-civet-app.svg
 [npm-url]: https://npmjs.org/package/generator-civet-app
-[travis-image]: https://travis-ci.com/niontrix/generator-civet-app.svg?branch=master
-[travis-url]: https://travis-ci.com/niontrix/generator-civet-app
-[daviddm-image]: https://david-dm.org/niontrix/generator-civet-app.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/niontrix/generator-civet-app
-
+[github-badge]: https://github.com/niontrix/generator-civet-app/actions/workflows/nodejs.yml/badge.svg?branch=master
+[github-url]: https://github.com/niontrix/generator-civet-app/actions/workflows/nodejs.yml
