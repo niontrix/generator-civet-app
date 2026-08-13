@@ -1,0 +1,11 @@
+{ message } from "./message"
+MyWorker from "./worker.civet?worker"
+
+console.log message
+
+worker := new MyWorker()
+worker.onmessage = (event) ->
+  console.log "Worker says:", event.data
+  document.body.appendChild document.createTextNode "Worker says: " + event.data + "\n"
+
+worker.postMessage "ping"

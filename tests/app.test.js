@@ -114,3 +114,26 @@ describe("generator-civet-app:webpack", () => {
     expect(fs.readFileSync(`${appName}/package.json`, "utf8")).toContain("webpack");
   });
 });
+
+describe("generator-civet-app:vite", () => {
+  beforeAll(() => helpers
+    .run(path.join(__dirname, "../generators/app"))
+    .withPrompts({ appName, buildFramework: "vite" }));
+
+  it("creates vite project files", () => {
+    expect(fs.existsSync(`${appName}/vite.config.js`)).toBe(true);
+    expect(fs.existsSync(`${appName}/package.json`)).toBe(true);
+    expect(fs.existsSync(`${appName}/tsconfig.json`)).toBe(true);
+    expect(fs.existsSync(`${appName}/index.html`)).toBe(true);
+    expect(fs.existsSync(`${appName}/src/main.civet`)).toBe(true);
+    expect(fs.existsSync(`${appName}/src/message.civet`)).toBe(true);
+    expect(fs.existsSync(`${appName}/src/worker.civet`)).toBe(true);
+    expect(fs.existsSync(`${appName}/.gitignore`)).toBe(true);
+    expect(fs.existsSync(`${appName}/.vscode/launch.json`)).toBe(true);
+    expect(fs.existsSync(`${appName}/.vscode/tasks.json`)).toBe(true);
+  });
+
+  it("adds vite dependencies", () => {
+    expect(fs.readFileSync(`${appName}/package.json`, "utf8")).toContain("vite");
+  });
+});

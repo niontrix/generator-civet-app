@@ -170,6 +170,50 @@ export default class CivetAppGenerator extends Generator {
     });
   }
 
+  #scaffoldViteProject(appName) {
+    const tmplSourceDir = "vite";
+
+    this.fs.copyTpl(
+      this.templatePath(`${tmplSourceDir}/package.json.ejs`),
+      this.destinationPath("package.json"),
+      { appName }
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/vite.config.js`),
+      this.destinationPath("vite.config.js")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/tsconfig.json`),
+      this.destinationPath("tsconfig.json")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/gitignore`),
+      this.destinationPath(".gitignore")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/index.html`),
+      this.destinationPath("index.html")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/src`),
+      this.destinationPath("src")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/vscode`),
+      this.destinationPath(".vscode")
+    );
+
+    this.addDevDependencies({
+      vite: "^8.2.0"
+    });
+  }
+
   #scaffoldWebpackProject(appName) {
     const tmplSourceDir = "webpack";
 
@@ -226,8 +270,8 @@ export default class CivetAppGenerator extends Generator {
       {
         type: "list",
         name: "buildFramework",
-        message: "What build framework would you like to use?",
-        choices: ["esbuild", "farm", "rolldown", "rollup", "webpack"]
+        message: "What kind of base would you like to use?",
+        choices: ["esbuild", "farm", "rolldown", "rollup", "vite", "webpack"]
       }
     ];
 
@@ -257,6 +301,11 @@ export default class CivetAppGenerator extends Generator {
 
       case "rollup": {
         this.#scaffoldRollupProject(appName);
+        break;
+      }
+
+      case "vite": {
+        this.#scaffoldViteProject(appName);
         break;
       }
 
