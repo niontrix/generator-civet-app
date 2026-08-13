@@ -1,0 +1,7 @@
+{
+  "jest.runMode": "on-demand",
+  "jest.enable": false,
+  "bun.test.enable": false,
+  "vitest.enable": true,
+  "vitest.watchOnStartup": false
+}

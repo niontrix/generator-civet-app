@@ -11,14 +11,10 @@ import {
 const __dirname = import.meta.dirname;
 const appName = "civet-test-app";
 
-describe("generator-civet-app:app", () => {
+describe("generator-civet-app:app - esbuild", () => {
   beforeAll(() => helpers
     .run(path.join(__dirname, "../generators/app"))
     .withPrompts({ appName, buildFramework: "esbuild" }));
-
-  it("sets the destination folder to the project  name", () => {
-    expect(true).toBeTruthy();
-  });
 
   it("creates files", () => {
     expect(fs.existsSync(`${appName}/esbuild.js`)).toBe(true);
@@ -29,5 +25,9 @@ describe("generator-civet-app:app", () => {
     expect(fs.existsSync(`${appName}/.gitignore`)).toBe(true);
     expect(fs.existsSync(`${appName}/.vscode/launch.json`)).toBe(true);
     expect(fs.existsSync(`${appName}/.vscode/tasks.json`)).toBe(true);
+  });
+
+  it("adds esbuild dependencies", () => {
+    expect(fs.readFileSync(`${appName}/package.json`, "utf8")).toContain("esbuild");
   });
 });
