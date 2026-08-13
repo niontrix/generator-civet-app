@@ -1,25 +1,8 @@
-import globals from "globals";
-import jest from "eslint-plugin-jest";
-
-/** @type {import("xo").FlatXoConfig} */
 export default [
   {
     ignores: [
       "**/templates/**"
     ]
-  },
-  {
-    files: [
-      "**/*.test.js",
-      "**/*.spec.js",
-    ],
-    ...jest.configs["flat/recommended"],
-    languageOptions: {
-      ...jest.configs["flat/recommended"].languageOptions,
-      globals: {
-        ...globals.jest
-      }
-    }
   },
   {
     space: true,
