@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "build",
+      "label": "npm: build",
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "open-chromium-debug-port",
+      "command": "node",
+      "args": [ "${workspaceFolder}/scripts/launch-chrome-debug.mjs" ],
+      "windows": {
+        "command": "node"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "silent",
+        "close": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

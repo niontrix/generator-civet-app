@@ -23,6 +23,24 @@ yo civet-app
  * Yeoman can be too opinionated at times but is easily convinced not to be.
  * Feel free to [learn more about Yeoman](http://yeoman.io/).
 
+ 
+## Project Types
+
+* esbuild
+
+* farm
+
+* rolldown
+
+* rollup
+
+* vite
+
+* vite-lib (Note: The debug configuration is a bit more involved in this case, so that everything can be properly started and stopped and doesn't remain as a zombie process. Have a look at the files in .vscode and scripts to see what's going on.)
+
+* webpack
+
+
  ## TODO
 
  - TypeScript <7.0.0 as DevDependency can be removed once Civet and it's plugins are adjusted to the breaking changes in TypeScript >=7.0.0

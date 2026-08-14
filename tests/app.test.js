@@ -137,3 +137,35 @@ describe("generator-civet-app:vite", () => {
     expect(fs.readFileSync(`${appName}/package.json`, "utf8")).toContain("vite");
   });
 });
+
+describe("generator-civet-app:vite-lib", () => {
+  beforeAll(() => helpers
+    .run(path.join(__dirname, "../generators/app"))
+    .withPrompts({ appName, buildFramework: "vite-lib" }));
+
+  it("creates vite-lib project files", () => {
+    expect(fs.existsSync(`${appName}/vite.config.js`)).toBe(true);
+    expect(fs.existsSync(`${appName}/package.json`)).toBe(true);
+    expect(fs.existsSync(`${appName}/index.html`)).toBe(true);
+    expect(fs.existsSync(`${appName}/src/main.civet`)).toBe(true);
+    expect(fs.existsSync(`${appName}/src/message.civet`)).toBe(true);
+    expect(fs.existsSync(`${appName}/scripts/dev-with-debug.mjs`)).toBe(true);
+    expect(fs.existsSync(`${appName}/scripts/launch-chrome-debug.sh`)).toBe(true);
+    expect(fs.existsSync(`${appName}/.gitignore`)).toBe(true);
+    expect(fs.existsSync(`${appName}/.vscode/launch.json`)).toBe(true);
+    expect(fs.existsSync(`${appName}/.vscode/tasks.json`)).toBe(true);
+  });
+
+  it("adds vite dependencies", () => {
+    expect(fs.readFileSync(`${appName}/package.json`, "utf8")).toContain("vite");
+  });
+
+  it("creates a executable chrome launcher script", () => {
+    expect(fs.existsSync(`${appName}/scripts/launch-chrome-debug.sh`)).toBe(true);
+    expect(fs.statSync(`${appName}/scripts/launch-chrome-debug.sh`).mode & 0o777).toBe(0o755);
+  });
+
+  it("adds a compound debug configuration", () => {
+    expect(fs.readFileSync(`${appName}/.vscode/launch.json`, "utf8")).toContain("Debug full app");
+  });
+});

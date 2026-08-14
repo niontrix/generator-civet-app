@@ -30,6 +30,7 @@ export default [
           ImportDeclaration: "always"
         }
       }],
+      "no-bitwise": "off",
     }
   }
 ];

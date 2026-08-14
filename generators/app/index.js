@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
@@ -214,6 +215,55 @@ export default class CivetAppGenerator extends Generator {
     });
   }
 
+  #scaffoldViteLibProject(appName) {
+    const tmplSourceDir = "vite-lib";
+
+    this.fs.copyTpl(
+      this.templatePath(`${tmplSourceDir}/package.json.ejs`),
+      this.destinationPath("package.json"),
+      { appName }
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/vite.config.js`),
+      this.destinationPath("vite.config.js")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/tsconfig.json`),
+      this.destinationPath("tsconfig.json")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/gitignore`),
+      this.destinationPath(".gitignore")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/index.html`),
+      this.destinationPath("index.html")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/src`),
+      this.destinationPath("src")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/scripts`),
+      this.destinationPath("scripts")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/vscode`),
+      this.destinationPath(".vscode")
+    );
+
+    this.addDevDependencies({
+      vite: "^8.2.0"
+    });
+  }
+
   #scaffoldWebpackProject(appName) {
     const tmplSourceDir = "webpack";
 
@@ -271,7 +321,7 @@ export default class CivetAppGenerator extends Generator {
         type: "list",
         name: "buildFramework",
         message: "What kind of base would you like to use?",
-        choices: ["esbuild", "farm", "rolldown", "rollup", "vite", "webpack"]
+        choices: ["esbuild", "farm", "rolldown", "rollup", "vite", "vite-lib", "webpack"]
       }
     ];
 
@@ -309,6 +359,11 @@ export default class CivetAppGenerator extends Generator {
         break;
       }
 
+      case "vite-lib": {
+        this.#scaffoldViteLibProject(appName);
+        break;
+      }
+
       case "webpack": {
         this.#scaffoldWebpackProject(appName);
         break;
@@ -325,5 +380,12 @@ export default class CivetAppGenerator extends Generator {
       "@danielx/civet": "^0.11.0",
       typescript: "<7.0.0"
     });
+  }
+
+  end() {
+    if (this.answers.buildFramework === "vite-lib") {
+      // Make the script executable, otherwise the debug config won't work
+      fs.chmodSync(this.destinationPath("scripts/launch-chrome-debug.sh"), 0o755);
+    }
   }
 }

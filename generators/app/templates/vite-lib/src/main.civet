@@ -1,0 +1,9 @@
+{ message } from "./message.civet"
+
+length: number := message.length
+// Uncomment to test type checking:
+// finite: boolean := message.isFinite()
+
+console.log message
+
+document.body.appendChild document.createTextNode "Civet says: " + message
