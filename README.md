@@ -26,6 +26,8 @@ yo civet-app
  
 ## Project Types
 
+* bun
+
 * esbuild
 
 * farm
@@ -34,9 +36,11 @@ yo civet-app
 
 * rollup
 
-* vite
+* vite  
+  (Note: The debug configuration is a bit more involved in this case, so that everything can be properly started and stopped and doesn't remain as a zombie process. Have a look at the files in .vscode and scripts to see what's going on.)
 
-* vite-lib (Note: The debug configuration is a bit more involved in this case, so that everything can be properly started and stopped and doesn't remain as a zombie process. Have a look at the files in .vscode and scripts to see what's going on.)
+* vite-lib  
+  (Note: The debug configuration is a bit more involved in this case, so that everything can be properly started and stopped and doesn't remain as a zombie process. Have a look at the files in .vscode and scripts to see what's going on.)
 
 * webpack
 
