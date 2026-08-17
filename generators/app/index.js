@@ -42,6 +42,41 @@ export default class CivetAppGenerator extends Generator {
     });
   }
 
+  #scaffoldBunProject(appName) {
+    const tmplSourceDir = "bun";
+
+    this.fs.copyTpl(
+      this.templatePath(`${tmplSourceDir}/package.json.ejs`),
+      this.destinationPath("package.json"),
+      { appName }
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/bunfig.toml`),
+      this.destinationPath("bunfig.toml")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/tsconfig.json`),
+      this.destinationPath("tsconfig.json")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/gitignore`),
+      this.destinationPath(".gitignore")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/src`),
+      this.destinationPath("src")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/vscode`),
+      this.destinationPath(".vscode")
+    );
+  }
+
   #scaffoldEsbuildProject(appName) {
     const tmplSourceDir = "esbuild";
 
@@ -320,7 +355,7 @@ export default class CivetAppGenerator extends Generator {
         type: "list",
         name: "buildFramework",
         message: "What kind of base would you like to use?",
-        choices: ["esbuild", "farm", "rolldown", "rollup", "vite", "vite-lib", "webpack"]
+        choices: ["bun", "esbuild", "farm", "rolldown", "rollup", "vite", "vite-lib", "webpack"]
       }
     ];
 
@@ -333,6 +368,11 @@ export default class CivetAppGenerator extends Generator {
     const { appName, buildFramework } = this.answers;
 
     switch (buildFramework) {
+      case "bun": {
+        this.#scaffoldBunProject(appName);
+        break;
+      }
+
       case "esbuild": {
         this.#scaffoldEsbuildProject(appName);
         break;

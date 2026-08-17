@@ -136,6 +136,10 @@ describe("generator-civet-app:vite", () => {
   it("adds vite dependencies", () => {
     expect(fs.readFileSync(`${appName}/package.json`, "utf8")).toContain("vite");
   });
+
+  it("adds full app debug configuration", () => {
+    expect(fs.readFileSync(`${appName}/.vscode/launch.json`, "utf8")).toContain("Debug full app");
+  });
 });
 
 describe("generator-civet-app:vite-lib", () => {
@@ -160,7 +164,28 @@ describe("generator-civet-app:vite-lib", () => {
     expect(fs.readFileSync(`${appName}/package.json`, "utf8")).toContain("vite");
   });
 
-  it("adds a compound debug configuration", () => {
+  it("adds a full app debug configuration", () => {
     expect(fs.readFileSync(`${appName}/.vscode/launch.json`, "utf8")).toContain("Debug full app");
+  });
+});
+
+describe("generator-civet-app:bun", () => {
+  beforeAll(() => helpers
+    .run(path.join(__dirname, "../generators/app"))
+    .withPrompts({ appName, buildFramework: "bun" }));
+
+  it("creates bun project files", () => {
+    expect(fs.existsSync(`${appName}/bunfig.toml`)).toBe(true);
+    expect(fs.existsSync(`${appName}/package.json`)).toBe(true);
+    expect(fs.existsSync(`${appName}/tsconfig.json`)).toBe(true);
+    expect(fs.existsSync(`${appName}/src/main.civet`)).toBe(true);
+    expect(fs.existsSync(`${appName}/src/message.civet`)).toBe(true);
+    expect(fs.existsSync(`${appName}/.gitignore`)).toBe(true);
+    expect(fs.existsSync(`${appName}/.vscode/launch.json`)).toBe(true);
+    expect(fs.existsSync(`${appName}/.vscode/tasks.json`)).toBe(true);
+  });
+
+  it("adds bun dependencies", () => {
+    expect(fs.readFileSync(`${appName}/package.json`, "utf8")).toContain("@types/bun");
   });
 });
