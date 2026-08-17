@@ -150,7 +150,7 @@ describe("generator-civet-app:vite-lib", () => {
     expect(fs.existsSync(`${appName}/src/main.civet`)).toBe(true);
     expect(fs.existsSync(`${appName}/src/message.civet`)).toBe(true);
     expect(fs.existsSync(`${appName}/scripts/dev-with-debug.mjs`)).toBe(true);
-    expect(fs.existsSync(`${appName}/scripts/launch-chrome-debug.sh`)).toBe(true);
+    expect(fs.existsSync(`${appName}/scripts/launch-chrome-debug.mjs`)).toBe(true);
     expect(fs.existsSync(`${appName}/.gitignore`)).toBe(true);
     expect(fs.existsSync(`${appName}/.vscode/launch.json`)).toBe(true);
     expect(fs.existsSync(`${appName}/.vscode/tasks.json`)).toBe(true);
@@ -158,11 +158,6 @@ describe("generator-civet-app:vite-lib", () => {
 
   it("adds vite dependencies", () => {
     expect(fs.readFileSync(`${appName}/package.json`, "utf8")).toContain("vite");
-  });
-
-  it("creates a executable chrome launcher script", () => {
-    expect(fs.existsSync(`${appName}/scripts/launch-chrome-debug.sh`)).toBe(true);
-    expect(fs.statSync(`${appName}/scripts/launch-chrome-debug.sh`).mode & 0o777).toBe(0o755);
   });
 
   it("adds a compound debug configuration", () => {

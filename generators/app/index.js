@@ -1,4 +1,3 @@
-import fs from "node:fs";
 import Generator from "yeoman-generator";
 import chalk from "chalk";
 import yosay from "yosay";
@@ -380,12 +379,5 @@ export default class CivetAppGenerator extends Generator {
       "@danielx/civet": "^0.11.0",
       typescript: "<7.0.0"
     });
-  }
-
-  end() {
-    if (this.answers.buildFramework === "vite-lib") {
-      // Make the script executable, otherwise the debug config won't work
-      fs.chmodSync(this.destinationPath("scripts/launch-chrome-debug.sh"), 0o755);
-    }
   }
 }
