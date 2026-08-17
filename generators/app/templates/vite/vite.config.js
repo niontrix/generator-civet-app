@@ -1,15 +1,22 @@
 import civetVitePlugin from '@danielx/civet/vite';
 import { defineConfig } from 'vite';
 
-// for more options, see https://github.com/DanielXMoore/Civet/tree/main/source/unplugin#options
-const civet = civetVitePlugin({
-  ts: 'preserve'
-});
-
 export default defineConfig({
-  plugins: [civet],
+  build: {
+    lib: {
+      entry: './src/main.civet',
+      fileName: 'main',
+      formats: ['cjs', 'es'],
+    },
+  },
   sourcemap: true,
-  worker: {
-    plugins: () => [civet]
-  }
+  plugins: [
+    civetVitePlugin({
+      // 'preserve' is used here, because otherwise debugging with source maps currently isn't working.
+      // If you want all the language features of Civet, use 'tsc' instead. Downside: no debugging.
+      ts: 'preserve',
+      emitDeclaration: true,
+      typecheck: true,
+    })
+  ],
 });

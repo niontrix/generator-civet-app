@@ -1,20 +1,18 @@
 {
   "compilerOptions": {
-    "strict": true,
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "isolatedModules": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "bundler",
-    "forceConsistentCasingInFileNames": true,
+    "noEmit": false,
+    "checkJs": false,
+    "declarationMap": false,
     "skipLibCheck": true,
-    "target": "es2022",
-    "resolveJsonModule": true,
-    "allowJs": false,
-    "jsx": "preserve"
-  },
-  "include": ["src/**/*", "tests/**/*"],
-  "exclude": ["node_modules", "dist"]
+    "target": "ESNext",
+    "allowJs": true,
+    "jsx": "preserve",
+    "declaration": true
+  }
 }
-

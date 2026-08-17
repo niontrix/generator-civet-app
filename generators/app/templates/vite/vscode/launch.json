@@ -2,12 +2,34 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug app",
+      "name": "Attach to Chrome (with Vite)",
       "type": "pwa-chrome",
-      "request": "launch",
-      "url": "http://127.0.0.1:5173",
+      "request": "attach",
+      "preLaunchTask": "open-chromium-debug-port",
+      "urlFilter": "http://127.0.0.1:5173/*",
       "webRoot": "${workspaceFolder}",
-      "preLaunchTask": "npm: dev"
+      "port": 9222,
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack://_N_E/*": "${webRoot}/src/*",
+        "webpack:///./src/*": "${webRoot}/src/*",
+        "/src/*": "${webRoot}/src/*"
+      }
+    },
+    {
+      "name": "Debug full app",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/dev-with-debug.mjs",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "serverReadyAction": {
+        "pattern": "Local:\\s+(https?://\\S+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
+      }
     }
   ]
 }
