@@ -36,6 +36,10 @@ export default class CivetAppGenerator extends Generator {
       this.templatePath(`${tmplSourceDir}/vscode`),
       this.destinationPath(".vscode")
     );
+
+    this.addDevDependencies({
+      "@types/bun": "latest"
+    });
   }
 
   #scaffoldEsbuildProject(appName) {
