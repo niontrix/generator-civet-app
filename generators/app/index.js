@@ -3,6 +3,52 @@ import chalk from "chalk";
 import yosay from "yosay";
 
 export default class CivetAppGenerator extends Generator {
+  #scaffoldAstroProject(appName) {
+    const tmplSourceDir = "astro+solid-js";
+
+    this.fs.copyTpl(
+      this.templatePath(`${tmplSourceDir}/package.json.ejs`),
+      this.destinationPath("package.json"),
+      { appName }
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/tsconfig.json`),
+      this.destinationPath("tsconfig.json")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/astro.config.mjs`),
+      this.destinationPath("astro.config.mjs")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/gitignore`),
+      this.destinationPath(".gitignore")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/README.md`),
+      this.destinationPath("README.md")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/src`),
+      this.destinationPath("src")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/vscode`),
+      this.destinationPath(".vscode")
+    );
+
+    this.addDependencies({
+      astro: "^7.2.0",
+      "@astrojs/solid-js": "^7.0.0",
+      "solid-js": "^1.9.0"
+    });
+  }
+
   #scaffoldBunProject(appName) {
     const tmplSourceDir = "bun";
 
@@ -359,7 +405,7 @@ export default class CivetAppGenerator extends Generator {
         type: "list",
         name: "buildFramework",
         message: "What kind of base would you like to use?",
-        choices: ["bun", "esbuild", "farm", "rolldown", "rollup", "vite", "vite-lib", "webpack"]
+        choices: ["astro+solid-js", "bun", "esbuild", "farm", "rolldown", "rollup", "vite", "vite-lib", "webpack"]
       }
     ];
 
@@ -372,6 +418,11 @@ export default class CivetAppGenerator extends Generator {
     const { appName, buildFramework } = this.answers;
 
     switch (buildFramework) {
+      case "astro+solid-js": {
+        this.#scaffoldAstroProject(appName);
+        break;
+      }
+
       case "bun": {
         this.#scaffoldBunProject(appName);
         break;

@@ -48,6 +48,9 @@ yo civet-app
  ## TODO
 
  - TypeScript <7.0.0 as DevDependency can be removed once Civet and it's plugins are adjusted to the breaking changes in TypeScript >=7.0.0
+ - Set all project versions to 0.0.1
+ - Create more robust test for dependencies
+ - Check if vite debug configurations really need to be that complicated
 
 
 [npm-image]: https://badge.fury.io/js/generator-civet-app.svg

@@ -189,3 +189,27 @@ describe("generator-civet-app:bun", () => {
     expect(fs.readFileSync(`${appName}/package.json`, "utf8")).toContain("@types/bun");
   });
 });
+
+describe("generator-civet-app:astro+solid-js", () => {
+  beforeAll(() => helpers
+    .run(path.join(__dirname, "../generators/app"))
+    .withPrompts({ appName, buildFramework: "astro+solid-js" }));
+
+  it("creates astro+solid-js project files", () => {
+    expect(fs.existsSync(`${appName}/package.json`)).toBe(true);
+    expect(fs.existsSync(`${appName}/tsconfig.json`)).toBe(true);
+    expect(fs.existsSync(`${appName}/astro.config.mjs`)).toBe(true);
+    expect(fs.existsSync(`${appName}/README.md`)).toBe(true);
+    expect(fs.existsSync(`${appName}/src/component.civet`)).toBe(true);
+    expect(fs.existsSync(`${appName}/src/env.d.ts`)).toBe(true);
+    expect(fs.existsSync(`${appName}/src/pages/index.astro`)).toBe(true);
+    expect(fs.existsSync(`${appName}/.gitignore`)).toBe(true);
+    expect(fs.existsSync(`${appName}/.vscode/launch.json`)).toBe(true);
+    expect(fs.existsSync(`${appName}/.vscode/tasks.json`)).toBe(true);
+  });
+
+  it("adds astro and solid-js dependencies", () => {
+    expect(fs.readFileSync(`${appName}/package.json`, "utf8")).toContain("astro");
+    expect(fs.readFileSync(`${appName}/package.json`, "utf8")).toContain("solid-js");
+  });
+});
