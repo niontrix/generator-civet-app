@@ -1,6 +1,6 @@
 {
   "name": "generator-civet-app",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "description": "A Yeoman generator to scaffold projects for the Civet language (https://civet.dev).",
   "homepage": "github.com/niontrix/generator-civet-app",
