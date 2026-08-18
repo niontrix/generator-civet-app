@@ -3,45 +3,6 @@ import chalk from "chalk";
 import yosay from "yosay";
 
 export default class CivetAppGenerator extends Generator {
-  #scaffoldRolldownProject(appName) {
-    const tmplSourceDir = "rolldown";
-
-    this.fs.copyTpl(
-      this.templatePath(`${tmplSourceDir}/package.json.ejs`),
-      this.destinationPath("package.json"),
-      { appName }
-    );
-
-    this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/rolldown.config.js`),
-      this.destinationPath("rolldown.config.js")
-    );
-
-    this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/tsconfig.json`),
-      this.destinationPath("tsconfig.json")
-    );
-
-    this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/gitignore`),
-      this.destinationPath(".gitignore")
-    );
-
-    this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/src`),
-      this.destinationPath("src")
-    );
-
-    this.fs.copy(
-      this.templatePath(`${tmplSourceDir}/vscode`),
-      this.destinationPath(".vscode")
-    );
-
-    this.addDevDependencies({
-      rolldown: "^1.2.0"
-    });
-  }
-
   #scaffoldBunProject(appName) {
     const tmplSourceDir = "bun";
 
@@ -113,6 +74,45 @@ export default class CivetAppGenerator extends Generator {
 
     this.addDevDependencies({
       esbuild: "^0.27.0"
+    });
+  }
+
+  #scaffoldRolldownProject(appName) {
+    const tmplSourceDir = "rolldown";
+
+    this.fs.copyTpl(
+      this.templatePath(`${tmplSourceDir}/package.json.ejs`),
+      this.destinationPath("package.json"),
+      { appName }
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/rolldown.config.js`),
+      this.destinationPath("rolldown.config.js")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/tsconfig.json`),
+      this.destinationPath("tsconfig.json")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/gitignore`),
+      this.destinationPath(".gitignore")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/src`),
+      this.destinationPath("src")
+    );
+
+    this.fs.copy(
+      this.templatePath(`${tmplSourceDir}/vscode`),
+      this.destinationPath(".vscode")
+    );
+
+    this.addDevDependencies({
+      rolldown: "^1.2.0"
     });
   }
 
